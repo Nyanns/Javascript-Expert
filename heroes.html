@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8">
+    <title>Our superheroes</title>
+    <link href="https://fonts.googleapis.com/css?family=Faster+One" rel="stylesheet">
+    <link rel="stylesheet" href="heroesstyle.css">
+</head>
+
+<body>
+    <header></header>
+    <section></section>
+
+    <script>
+        /**
+         * Fetch superhero data from the API and populate the page with the list of superheroes.
+         */
+        async function populate() {
+            const requestURL = "https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json";
+            const response = await fetch(requestURL);
+            const superHeroes = await response.json();
+
+            populateHeader(superHeroes);
+            populateHeroes(superHeroes);
+        }
+
+        /**
+         * Populate the page's header section with the superhero team's name and 
+         * details about where they are from and when they were formed.
+         * @param {Object} obj An object containing the superhero team's details.
+         */
+        function populateHeader(obj) {
+            const header = document.querySelector("header"); // Get the header element
+            header.innerHTML = `<h1>${obj.squadName}</h1>
+                                <p>Hometown: ${obj.homeTown} // Formed: ${obj.formed}</p>`;
+        }
+
+        /**
+         * Populate the page with articles of each superhero.
+         * @param {Object} obj The superhero data containing an array of members.
+         */
+        function populateHeroes(obj) {
+            const section = document.querySelector("section"); // Get the section element
+            const heroes = obj.members; // Array of heroes
+
+            // Create document fragment for performance optimization
+            const fragment = document.createDocumentFragment();
+
+            for (const hero of heroes) {
+                const myArticle = document.createElement("article");
+                myArticle.innerHTML = `
+                    <h2>${hero.name}</h2>
+                    <p>Secret identity: ${hero.secretIdentity}</p>
+                    <p>Age: ${hero.age}</p>
+                    <p>Superpowers:</p>
+                `;
+
+                const myList = document.createElement("ul"); // Create an unordered list for powers
+                hero.powers.forEach(power => {
+                    const listItem = document.createElement("li");
+                    listItem.textContent = power;
+                    myList.appendChild(listItem); // Append each power as list item
+                });
+
+                myArticle.appendChild(myList); // Append list to article
+                fragment.appendChild(myArticle); // Append article to fragment
+            }
+
+            section.appendChild(fragment); // Append fragment to section in one operation
+        }
+
+        populate();
+    </script>
+</body>
+
+</html>

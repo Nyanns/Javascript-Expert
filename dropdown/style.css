@@ -1,0 +1,76 @@
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Dropdown Styles */
+.dropdown {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Dropdown Toggle (Button) */
+.dropdown-toggle {
+    background-color: #ffb6c1; /* Soft pink */
+    color: #fff;
+    font-weight: bold;
+    border-radius: 8px;
+    padding: 10px;
+    width: 120px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-toggle:hover {
+    background-color: #ff80a0; /* Slightly darker pink on hover */
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    display: none;
+    flex-direction: column; /* Ensure items are stacked vertically */
+    position: absolute;
+    top: 110%;
+    left: 0;
+    background-color: #fff0f5;
+    border-radius: 8px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    padding: 8px;
+    z-index: 1;
+    gap: 8px; /* Creates vertical space between each item */
+    width: 100%; /* Set width to fit the toggle button */
+    min-width: 160px; /* Optional: set a minimum width if needed */
+}
+
+
+/* Show menu when visible class is added */
+.dropdown-menu.visible {
+    display: block;
+}
+
+/* Dropdown Menu Links */
+.dropdown-menu a {
+    color: #333;
+    padding: 10px 16px;
+    text-decoration: none;
+    border-radius: 6px;
+    background-color: #ffe4e1;
+    transition: background-color 0.3s ease;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    width: 100%; /* Make links expand to the dropdown width */
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
+
+.dropdown-menu a:hover {
+    background-color: #ffc1cc;
+}
+
+/* Show dropdown on button click */
+.dropdown-toggle:focus + .dropdown-menu,
+.dropdown:hover .dropdown-menu {
+    display: flex; /* Display menu as flex to keep vertical stacking */
+}

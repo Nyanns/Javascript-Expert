@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validasi Form Sederhana</title>
+</head>
+
+<body>
+    <form id="formPendaftaran">
+        <label for="nama">Nama:</label>
+        <input type="text" id="nama" name="nama">
+        <span id="namaError"></span>
+        <br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+        <span id="emailError"></span>
+        <br><br>
+
+        <label for="kataSandi">Kata Sandi:</label>
+        <input type="password" id="kataSandi" name="kataSandi">
+        <span id="kataSandiError"></span>
+        <br><br>
+
+        <button type="submit">Daftar</button>
+    </form>
+
+    <script>
+        document.getElementById("formPendaftaran").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            // Ambil data input dari form
+            const nama = document.getElementById("nama").value;
+            const email = document.getElementById("email").value;
+            const kataSandi = document.getElementById("kataSandi").value;
+
+            // Reset pesan kesalahan
+            document.getElementById("namaError").textContent = "";
+            document.getElementById("emailError").textContent = "";
+            document.getElementById("kataSandiError").textContent = "";
+
+            let isValid = true;
+
+            // Validasi nama
+            if (nama.length < 3) {
+                document.getElementById("namaError").textContent = "Nama harus minimal 3 karakter.";
+                isValid = false;
+            }
+
+            // Validasi email
+            const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+            if (!emailPattern.test(email)) {
+                document.getElementById("emailError").textContent = "Masukkan email yang valid.";
+                isValid = false;
+            }
+
+            // Validasi kata sandi
+            if (kataSandi.length < 8) {
+                document.getElementById("kataSandiError").textContent = "Kata sandi harus minimal 8 karakter.";
+                isValid = false;
+            }
+
+            // Jika semua valid, tampilkan pesan berhasil
+            if (isValid) {
+                alert("Pendaftaran berhasil!");
+                // Bisa submit form atau melakukan aksi lain di sini
+            }
+        });
+    </script>
+</body>
+
+</html>

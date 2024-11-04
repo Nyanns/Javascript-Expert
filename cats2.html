@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8" />
+    <title>JSON: Task 1</title>
+    <style>
+        /* Font Umum dan Warna */
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #FFF8F0;
+            /* Warna pastel untuk latar belakang */
+            color: #5C4A72;
+            /* Warna teks lembut */
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Gaya untuk Heading */
+        h1 {
+            font-size: 3rem;
+            color: #FF6B6B;
+            text-align: center;
+            margin-bottom: 1em;
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #4A4E69;
+        }
+
+        /* Efek Teks di Paragraph */
+        .preview p {
+            color: #4A4E69;
+            background-color: #FFECEF;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 0.5em 0;
+            box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Efek Lucu pada Teks */
+        .preview p:hover {
+            background-color: #FFCCD2;
+            transform: scale(1.05);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        /* Style Tombol */
+        button {
+            font-size: 1.1rem;
+            background-color: #FFABAB;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #FF6B6B;
+        }
+
+        /* Efek Bayangan */
+        h1,
+        p {
+            text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <link rel="stylesheet" href="../styles.css" />
+</head>
+
+<body>
+
+    <section class="preview"></section>
+
+    <script>
+        const section = document.querySelector('section');
+
+        const requestURL = 'https://mdn.github.io/learning-area/javascript/oojs/tasks/json/sample.json';
+
+        async function fetchAndDisplayCatInfo() {
+            try {
+                const response = await fetch(requestURL);
+                const cats = await response.json();
+                displayCatInfo(cats);
+            } catch (error) {
+                console.error("Error fetching cat data:", error);
+            }
+        }
+
+        function displayCatInfo(cats) {
+            let motherInfo = `The mother cats are called ${cats.map(cat => cat.name).join(', ').replace(/,([^,]*)$/, ' and$1')}.`;
+            let total = cats.reduce((sum, cat) => sum + cat.kittens.length, 0);
+            let male = cats.reduce((sum, cat) => sum + cat.kittens.filter(kitten => kitten.gender === "m").length, 0);
+
+            let para1 = document.createElement('p');
+            para1.textContent = motherInfo;
+
+            let para2 = document.createElement('p');
+            para2.textContent = `The total number of kittens is ${total}. The number of male kittens is ${male}. The number of female kittens is ${total - male}.`;
+
+            section.append(para1, para2);
+        }
+
+        fetchAndDisplayCatInfo();
+    </script>
+</body>
+
+</html>

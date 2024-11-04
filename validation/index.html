@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container-form">
+        <div class="tittle-form">
+            <h1>REGISTER FORM</h1>
+        </div>
+        <form id="registrationform">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+                <span id="emailError" class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <label for="country">Country:</label>
+                <input type="text" id="country" required>
+                <span id="countryError" class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <label for="zip">Zip Code:</label>
+                <input type="text" id="zip" pattern="\d{5}" required>
+                <span id="zipError" class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" required minlength="8">
+                <span id="passwordError" class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <label for="confirmpassword">Confirm Password:</label>
+                <input type="password" id="confirmpassword" required>
+                <span id="confirmpasswordError" class="error-message"></span>
+            </div>
+            <button type="submit">Submit</button>
+            <div id="successMessage">Form submitted successfully!</div>
+        </form>
+
+        <div id="formDataDisplay" style="display: none;">
+            <!-- Display area for saved form entries -->
+        </div>
+
+    </div>
+
+    <script src="/Javascript-Expert/validation/script.js" type="module"></script>
+</body>
+
+</html>

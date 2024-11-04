@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Image Carousel</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .carousel {
+            position: relative;
+            width: 600px;
+            overflow: hidden;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .prev-btn {
+            left: 10px;
+            transform: translateY(-50%);
+        }
+
+        .next-btn {
+            right: 10px;
+            transform: translateY(-50%);
+        }
+
+        .carousel-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .carousel-nav button {
+            background-color: #bbb;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            height: 10px;
+            margin: 0 5px;
+            width: 10px;
+        }
+
+        .carousel-nav .current {
+            background-color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="carousel">
+        <div class="carousel-track">
+            <div class="carousel-slide"><img src="/Admin-Dashboard-Nyanns/Media/Img/acheron-hsr.gif" alt="Slide 1">
+            </div>
+            <div class="carousel-slide"><img src="/Admin-Dashboard-Nyanns/Media/Img/nezuko.gif" alt="Slide 2"></div>
+            <div class="carousel-slide"><img src="/Admin-Dashboard-Nyanns/Media/Img/anime-kanao-tsuyuri.gif"
+                    alt="Slide 3"></div>
+        </div>
+        <button class="carousel-btn prev-btn">&#10094;</button>
+        <button class="carousel-btn next-btn">&#10095;</button>
+        <div class="carousel-nav"></div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const track = document.querySelector('.carousel-track');
+            const slides = Array.from(track.children);
+            const prevButton = document.querySelector('.prev-btn');
+            const nextButton = document.querySelector('.next-btn');
+            const nav = document.querySelector('.carousel-nav');
+
+            let currentIndex = 0;
+
+            // Create navigation dots
+            slides.forEach((slide, index) => {
+                const dot = document.createElement('button');
+                dot.classList.add(index === 0 ? 'current' : '');
+                dot.addEventListener('click', () => {
+                    goToSlide(index);
+                });
+                nav.appendChild(dot);
+            });
+
+            // Navigate to the next slide
+            function goToSlide(index) {
+                currentIndex = index;
+                const slideWidth = slides[0].getBoundingClientRect().width;
+                track.style.transform = `translateX(-${slideWidth * index}px)`;
+                updateDots();
+            }
+
+            // Update the navigation dots
+            function updateDots() {
+                const dots = Array.from(nav.children);
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('current', i === currentIndex);
+                });
+            }
+
+            // Move to the next slide
+            function nextSlide() {
+                const nextIndex = (currentIndex + 1) % slides.length;
+                goToSlide(nextIndex);
+            }
+
+            // Move to the previous slide
+            function prevSlide() {
+                const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
+                goToSlide(prevIndex);
+            }
+
+            // Event listeners for buttons
+            nextButton.addEventListener('click', nextSlide);
+            prevButton.addEventListener('click', prevSlide);
+
+            // Auto-advance every 5 seconds
+            setInterval(nextSlide, 5000);
+        });
+    </script>
+</body>
+
+</html>

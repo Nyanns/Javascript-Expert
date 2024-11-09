@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="myForm">
+        <label for="email">Email:</label>
+        <input type="email" id="email">
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        const form = document.getElementById('myForm');
+        const emailInput = document.getElementById('email');
+
+        form.addEventListener('submit', function (event) {
+            console.log("Submit event triggered"); // Untuk memastikan event berjalan
+
+            if (!emailInput.value) { // Periksa jika email kosong
+                event.preventDefault(); // Mencegah pengiriman
+                alert("Email harus diisi!"); // Pesan kustom jika email kosong
+            } else if (!emailInput.checkValidity()) { // Jika ada masalah validasi
+                event.preventDefault(); // Mencegah pengiriman
+                emailInput.setCustomValidity('Masukkan alamat email yang valid!'); // Pesan kustom
+                emailInput.reportValidity(); // Tampilkan pesan validasi
+                console.log("Invalid email");
+            } else {
+                emailInput.setCustomValidity(''); // Menghapus pesan kustom jika valid
+                console.log("Valid email");
+            }
+        });
+
+
+    </script>
+</body>
+
+</html>

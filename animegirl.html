@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Girl Drawing</title>
+</head>
+
+<body>
+    <canvas id="animeCanvas" width="500" height="500"></canvas>
+
+    <script>
+        const canvas = document.getElementById('animeCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Menggambar wajah (circle)
+        ctx.beginPath();
+        ctx.arc(250, 200, 100, 0, Math.PI * 2); // (x, y, radius, start angle, end angle)
+        ctx.fillStyle = '#FFD700'; // warna kulit
+        ctx.fill();
+        ctx.stroke(); // untuk garis luar
+
+        // Menggambar mata kiri
+        ctx.beginPath();
+        ctx.arc(200, 170, 20, 0, Math.PI * 2);
+        ctx.fillStyle = '#FFFFFF'; // warna putih mata
+        ctx.fill();
+        ctx.stroke();
+
+        // Menggambar mata kanan
+        ctx.beginPath();
+        ctx.arc(300, 170, 20, 0, Math.PI * 2);
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fill();
+        ctx.stroke();
+
+        // Menggambar pupil kiri
+        ctx.beginPath();
+        ctx.arc(200, 170, 10, 0, Math.PI * 2);
+        ctx.fillStyle = '#000000'; // warna pupil
+        ctx.fill();
+        ctx.stroke();
+
+        // Menggambar pupil kanan
+        ctx.beginPath();
+        ctx.arc(300, 170, 10, 0, Math.PI * 2);
+        ctx.fillStyle = '#000000';
+        ctx.fill();
+        ctx.stroke();
+
+        // Menggambar mulut
+        ctx.beginPath();
+        ctx.arc(250, 230, 40, 0, Math.PI); // setengah lingkaran
+        ctx.fillStyle = '#FF6347'; // warna merah untuk bibir
+        ctx.fill();
+        ctx.stroke();
+
+        // Menggambar rambut kiri
+        ctx.beginPath();
+        ctx.moveTo(150, 140); // titik awal
+        ctx.lineTo(100, 100); // garis kiri rambut
+        ctx.lineTo(150, 60);
+        ctx.lineTo(180, 100);
+        ctx.closePath();
+        ctx.fillStyle = '#8B4513'; // warna coklat rambut
+        ctx.fill();
+        ctx.stroke();
+
+        // Menggambar rambut kanan
+        ctx.beginPath();
+        ctx.moveTo(350, 140); // titik awal
+        ctx.lineTo(400, 100); // garis kanan rambut
+        ctx.lineTo(350, 60);
+        ctx.lineTo(320, 100);
+        ctx.closePath();
+        ctx.fillStyle = '#8B4513';
+        ctx.fill();
+        ctx.stroke();
+
+        // Menggambar tubuh
+        ctx.beginPath();
+        ctx.moveTo(250, 300); // posisi awal tubuh
+        ctx.lineTo(250, 450); // garis tubuh
+        ctx.lineWidth = 5;
+        ctx.stroke();
+
+        // Menggambar lengan kiri
+        ctx.beginPath();
+        ctx.moveTo(150, 300); // posisi tangan kiri
+        ctx.lineTo(150, 400); // lengan kiri
+        ctx.stroke();
+
+        // Menggambar lengan kanan
+        ctx.beginPath();
+        ctx.moveTo(350, 300); // posisi tangan kanan
+        ctx.lineTo(350, 400); // lengan kanan
+        ctx.stroke();
+    </script>
+</body>
+
+</html>
